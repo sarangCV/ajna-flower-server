@@ -55,4 +55,8 @@ router.post('/login', async (req, res) => {
     res.header('auth-token', token).send({token: token})   
 })
 
+router.get('/test', async (req, res) => {
+    res.send("working")
+})
+
 module.exports = router;
