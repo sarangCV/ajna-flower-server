@@ -22,4 +22,4 @@ app.get('/test', async (req, res) => {
     res.send("working")
 })
 
-app.listen(3000, () => console.log(('Server Up and running')))
+app.listen(process.env.PORT, () => console.log(('Server Up and running')))
