@@ -52,11 +52,12 @@ router.post('/login', async (req, res) => {
 
     // Create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_KEY)
-    res.header('auth-token', token).send({token: token})   
-})
-
-router.get('/test', async (req, res) => {
-    res.send("working")
+    res.cookie('jwt', token, {
+        expires: new Date(Date.now + 30000),
+        httpOnly: true
+    })  
+    res.header('auth-token', token).send({token: token}) 
+    
 })
 
 module.exports = router;

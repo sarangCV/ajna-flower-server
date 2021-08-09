@@ -3,8 +3,10 @@ const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
+
 // Import route
 const authRoute = require('./routes/auth');
+const items = require('./routes/items')
 
 dotenv.config();
 
@@ -17,9 +19,6 @@ app.use(cors());
 
 // Route Middleware
 app.use('/auth', authRoute);
-
-app.get('/test', async (req, res) => {
-    res.send("working")
-})
+app.use('/items', items);
 
 app.listen(process.env.PORT, () => console.log(('Server Up and running')))
