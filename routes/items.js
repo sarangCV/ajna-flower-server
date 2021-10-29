@@ -9,7 +9,8 @@ router.post('/add-item' ,async (req, res) => {
         itemName: req.body.itemName,
         itemPrice: req.body.itemPrice,
         itemVendor: req.body.itemVendor,
-        itemDetails: req.body.itemDetails
+        itemDetails: req.body.itemDetails,
+        date: req.body.date
     });
 
     try {
@@ -60,6 +61,7 @@ router.post('/update/:id', async (req, res) => {
         item.itemPrice = req.body.itemPrice;
         item.itemVendor = req.body.itemVendor;
         item.itemDetails = req.body.itemDetails;
+        item.date = req.body.date
         await item.save()
         res.json({message: 'Item updated', success: true})
     } catch (error) {
