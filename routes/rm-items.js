@@ -1,18 +1,18 @@
 const router = require('express').Router();
 const verifyToken = require('../middleware/verifyToken');
-const Item = require('../model/Item');
+const Item = require('../model/RMItem');
 
 // ADD ITEMS
 router.post('/add-item' ,async (req, res) => {
     console.log(req.body)
     const item = new Item({
-        itemName: req.body.itemName,
-        itemPrice: req.body.itemPrice,
-        itemVendor: req.body.itemVendor,
-        itemDetails: req.body.itemDetails,
+        rmParticular: req.body.rmParticular,
+        rmPrice: req.body.rmPrice,
+        rmQuantity: req.body.rmQuantity,
+        rmCommission: req.body.rmCommission,
+        rmNote: req.body.rmNote,
         date: req.body.date
     });
-
     try {
         const savedItem = await item.save()
         res.send({message: 'Item accepted', success: true});
@@ -24,7 +24,6 @@ router.post('/add-item' ,async (req, res) => {
 
 // GET ITEMS
 router.get('/', async (req, res) => {
-    console.log('Getting all items')
     try {
         const item = await Item.find();        
         res.json(item);
@@ -58,10 +57,11 @@ router.post('/update/:id', async (req, res) => {
     console.log('update api working..')
     try {
         const item = await Item.findById(req.params.id)
-        item.itemName = req.body.itemName;
-        item.itemPrice = req.body.itemPrice;
-        item.itemVendor = req.body.itemVendor;
-        item.itemDetails = req.body.itemDetails;
+        item.rmParticular = req.body.rmParticular;
+        item.rmPrice = req.body.rmPrice;
+        item.rmQuantity = req.body.rmQuantity;
+        item.rmCommission = req.body.rmCommission;
+        item.rmNote = req.body.rmNote;
         item.date = req.body.date
         await item.save()
         res.json({message: 'Item updated', success: true})

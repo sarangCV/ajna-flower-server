@@ -6,7 +6,8 @@ const cors = require('cors');
 
 // Import route
 const authRoute = require('./routes/auth');
-const items = require('./routes/items')
+const items = require('./routes/items');
+const rmItems = require('./routes/rm-items');
 
 dotenv.config();
 
@@ -20,5 +21,7 @@ app.use(cors());
 // Route Middleware
 app.use('/auth', authRoute);
 app.use('/items', items);
+app.use('/rm', rmItems);
+
 
 app.listen(process.env.PORT, () => console.log(('Server Up and running')))
